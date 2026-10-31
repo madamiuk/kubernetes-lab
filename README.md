@@ -188,7 +188,8 @@ The internal HTTP test returned `HTTP/1.1 200 OK`.
 | K8S-012 | ClusterIP Services and EndpointSlices | Completed |
 | K8S-013 | Kubernetes DNS and inter-Pod communication | Completed |
 | K8S-014 | Service traffic distribution | Completed |
-| K8S-015 | Project documentation and Git setup | In progress |
+| K8S-015 | Project documentation and Git setup | Completed |
+| K8S-016 | Rolling Updates and Rollbacks | Completed |
 
 ## 8. Documentation
 
@@ -199,8 +200,9 @@ Detailed technical documentation is organized into:
 - [Pods and Deployments](docs/03-pods-deployments.md)
 - [Self-Healing and Scaling](docs/04-self-healing-scaling.md)
 - [Services and DNS](docs/05-services-dns.md)
+- [Rolling Updates and Rollbacks](docs/06-rolling-updates-rollbacks.md)
 
-These documents will be completed as part of the project documentation checkpoint.
+The documentation covers completed laboratories K8S-001 through K8S-016, including cluster administration, application deployments, networking, rolling updates, and rollback procedures.
 
 ## 9. Troubleshooting Experience
 
