@@ -219,7 +219,6 @@ The project includes practical investigation of:
 
 Future topics include:
 
-- Rolling updates and rollbacks.
 - Readiness, liveness, and startup probes.
 - ConfigMaps and Secrets.
 - PersistentVolumes and PersistentVolumeClaims.
