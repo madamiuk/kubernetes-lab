@@ -1,0 +1,27 @@
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Editor backups
+*.swp
+*.swo
+*~
+
+# Local Kubernetes configuration
+kubeconfig
+kubeconfig.*
+.kube/
+
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Local logs and temporary files
+*.log
+*.tmp
