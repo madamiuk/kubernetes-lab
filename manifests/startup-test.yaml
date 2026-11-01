@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-startup-test
+  namespace: lab-apps
+  labels:
+    app: nginx-startup-test
+spec:
+  containers:
+    - name: nginx
+      image: nginx:stable-alpine
+      command:
+        - /bin/sh
+        - -c
+      args:
+        - |
+          echo "Simulating slow application startup..."
+          sleep 25
+          echo "Starting Nginx..."
+          exec nginx -g 'daemon off;'
+      ports:
+        - containerPort: 80
+      startupProbe:
+        httpGet:
+          path: /
+          port: 80
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 12
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 80
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 2
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 80
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 3
+      resources:
+        requests:
+          cpu: "50m"
+          memory: "64Mi"
+        limits:
+          cpu: "250m"
+          memory: "128Mi"
