@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html
+  namespace: lab-apps
+  labels:
+    app: nginx
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Kubernetes ConfigMap Lab</title>
+    </head>
+    <body>
+      <h1>Kubernetes Administration Lab</h1>
+      <h2>LAB K8S-018 — ConfigMaps</h2>
+      <p>Environment: kind-k8s-lab</p>
+      <p>Configuration delivered through Kubernetes ConfigMap.</p>
+      <p>Version: 2.0</p>
+      <p>Updated dynamically without restarting Nginx Pods.</p>
+    </body>
+    </html>

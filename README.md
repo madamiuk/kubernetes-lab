@@ -191,6 +191,7 @@ The internal HTTP test returned `HTTP/1.1 200 OK`.
 | K8S-015 | Project documentation and Git setup | Completed |
 | K8S-016 | Rolling Updates and Rollbacks | Completed |
 | K8S-017 | Kubernetes Health Probes | Completed |
+| K8S-018 | ConfigMaps and Secrets | Completed |
 
 ## 8. Documentation
 
@@ -203,8 +204,10 @@ Detailed technical documentation is organized into:
 - [Services and DNS](docs/05-services-dns.md)
 - [Rolling Updates and Rollbacks](docs/06-rolling-updates-rollbacks.md)
 - [Health Probes](docs/07-health-probes.md)
+- [ConfigMaps and Secrets](docs/08-configmaps-secrets.md)
 
-The documentation covers completed laboratories K8S-001 through K8S-017, including cluster administration, application deployments, networking, rolling updates, rollbacks, and Kubernetes health probes.
+
+The documentation covers completed laboratories K8S-001 through K8S-018, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, and Secrets.
 
 ## 9. Troubleshooting Experience
 
@@ -221,7 +224,6 @@ The project includes practical investigation of:
 
 Future topics include:
 
-- ConfigMaps and Secrets.
 - PersistentVolumes and PersistentVolumeClaims.
 - RBAC and service accounts.
 - Resource quotas and monitoring.
