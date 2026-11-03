@@ -192,6 +192,7 @@ The internal HTTP test returned `HTTP/1.1 200 OK`.
 | K8S-016 | Rolling Updates and Rollbacks | Completed |
 | K8S-017 | Kubernetes Health Probes | Completed |
 | K8S-018 | ConfigMaps and Secrets | Completed |
+| K8S-019 | PersistentVolumes and PersistentVolumeClaims | Completed |
 
 ## 8. Documentation
 
@@ -205,9 +206,9 @@ Detailed technical documentation is organized into:
 - [Rolling Updates and Rollbacks](docs/06-rolling-updates-rollbacks.md)
 - [Health Probes](docs/07-health-probes.md)
 - [ConfigMaps and Secrets](docs/08-configmaps-secrets.md)
+- [PersistentVolumes and PersistentVolumeClaims](docs/09-persistent-volumes.md)
 
-
-The documentation covers completed laboratories K8S-001 through K8S-018, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, and Secrets.
+The documentation covers completed laboratories K8S-001 through K8S-019, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, and persistent storage.
 
 ## 9. Troubleshooting Experience
 
@@ -224,7 +225,6 @@ The project includes practical investigation of:
 
 Future topics include:
 
-- PersistentVolumes and PersistentVolumeClaims.
 - RBAC and service accounts.
 - Resource quotas and monitoring.
 - Helm.
