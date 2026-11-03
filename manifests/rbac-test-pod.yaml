@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rbac-test
+  namespace: lab-apps
+  labels:
+    app: rbac-lab
+spec:
+  serviceAccountName: pod-reader
+  restartPolicy: Never
+  containers:
+    - name: rbac-test
+      image: alpine:3.21
+      command:
+        - /bin/sh
+        - -c
+      args:
+        - |
+          echo "RBAC test Pod started"
+          sleep 3600
+      resources:
+        requests:
+          cpu: "10m"
+          memory: "16Mi"
+        limits:
+          cpu: "100m"
+          memory: "64Mi"
