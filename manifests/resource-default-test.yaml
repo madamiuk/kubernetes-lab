@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-default-test
+  namespace: resource-lab
+  labels:
+    app: resource-lab
+    test: default-resources
+spec:
+  restartPolicy: Never
+  containers:
+    - name: resource-test
+      image: busybox:1.36
+      command:
+        - /bin/sh
+        - -c
+      args:
+        - |
+          echo "K8S-021 resource defaults test started"
+          sleep 3600

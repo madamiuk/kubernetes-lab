@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-quota-exceeded
+  namespace: resource-lab
+  labels:
+    app: resource-lab
+    test: quota-exceeded
+spec:
+  restartPolicy: Never
+  containers:
+    - name: resource-test
+      image: busybox:1.36
+      command:
+        - /bin/sh
+        - -c
+      args:
+        - |
+          echo "K8S-021 ResourceQuota rejection test"
+          sleep 3600
+      resources:
+        requests:
+          cpu: "300m"
+          memory: "32Mi"
+        limits:
+          cpu: "400m"
+          memory: "128Mi"

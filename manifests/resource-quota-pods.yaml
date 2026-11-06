@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quota-test-1
+  namespace: resource-lab
+  labels:
+    app: resource-lab
+    test: pod-quota
+spec:
+  restartPolicy: Never
+  containers:
+    - name: quota-test
+      image: busybox:1.36
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          echo "Quota test Pod 1 started"
+          sleep 3600
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quota-test-2
+  namespace: resource-lab
+  labels:
+    app: resource-lab
+    test: pod-quota
+spec:
+  restartPolicy: Never
+  containers:
+    - name: quota-test
+      image: busybox:1.36
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          echo "Quota test Pod 2 started"
+          sleep 3600
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quota-test-3
+  namespace: resource-lab
+  labels:
+    app: resource-lab
+    test: pod-quota
+spec:
+  restartPolicy: Never
+  containers:
+    - name: quota-test
+      image: busybox:1.36
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          echo "Quota test Pod 3 started"
+          sleep 3600

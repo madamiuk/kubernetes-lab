@@ -194,6 +194,7 @@ The internal HTTP test returned `HTTP/1.1 200 OK`.
 | K8S-018 | ConfigMaps and Secrets | Completed |
 | K8S-019 | PersistentVolumes and PersistentVolumeClaims | Completed |
 | K8S-020 | RBAC and Service Accounts | Completed |
+| K8S-021 | Resource Requests, Limits and ResourceQuotas | Completed |
 
 ## 8. Documentation
 
@@ -209,8 +210,9 @@ Detailed technical documentation is organized into:
 - [ConfigMaps and Secrets](docs/08-configmaps-secrets.md)
 - [PersistentVolumes and PersistentVolumeClaims](docs/09-persistent-volumes.md)
 - [RBAC and Service Accounts](docs/10-rbac-service-accounts.md)
+- [Resource Requests, Limits and ResourceQuotas](docs/11-resource-management.md)
 
-The documentation covers completed laboratories K8S-001 through K8S-020, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, and Kubernetes RBAC.
+The documentation covers completed laboratories K8S-001 through K8S-021, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, Kubernetes RBAC, and resource management.
 
 ## 9. Troubleshooting Experience
 
@@ -227,7 +229,7 @@ The project includes practical investigation of:
 
 Future topics include:
 
-- Resource quotas and monitoring.
+- Kubernetes metrics and monitoring.
 - Helm.
 - Kubernetes automation with Ansible and Terraform.
 - CI/CD with GitHub Actions.

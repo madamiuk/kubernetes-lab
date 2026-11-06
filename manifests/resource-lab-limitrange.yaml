@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: resource-lab-limits
+  namespace: resource-lab
+  labels:
+    app: resource-lab
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: "200m"
+        memory: "128Mi"
+      defaultRequest:
+        cpu: "50m"
+        memory: "32Mi"
+      min:
+        cpu: "10m"
+        memory: "16Mi"
+      max:
+        cpu: "500m"
+        memory: "256Mi"
