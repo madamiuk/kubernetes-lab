@@ -195,6 +195,7 @@ The internal HTTP test returned `HTTP/1.1 200 OK`.
 | K8S-019 | PersistentVolumes and PersistentVolumeClaims | Completed |
 | K8S-020 | RBAC and Service Accounts | Completed |
 | K8S-021 | Resource Requests, Limits and ResourceQuotas | Completed |
+| K8S-022 | Metrics Server, Resource Metrics and CPU Throttling | Completed |
 
 ## 8. Documentation
 
@@ -211,8 +212,9 @@ Detailed technical documentation is organized into:
 - [PersistentVolumes and PersistentVolumeClaims](docs/09-persistent-volumes.md)
 - [RBAC and Service Accounts](docs/10-rbac-service-accounts.md)
 - [Resource Requests, Limits and ResourceQuotas](docs/11-resource-management.md)
+- [Metrics Server, Resource Metrics and CPU Throttling](docs/12-metrics-monitoring.md)
 
-The documentation covers completed laboratories K8S-001 through K8S-021, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, Kubernetes RBAC, and resource management.
+The documentation covers completed laboratories K8S-001 through K8S-022, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, Kubernetes RBAC, resource management, Metrics Server, resource usage analysis, and CPU throttling.
 
 ## 9. Troubleshooting Experience
 
@@ -229,7 +231,8 @@ The project includes practical investigation of:
 
 Future topics include:
 
-- Kubernetes metrics and monitoring.
+- Prometheus and Grafana monitoring, dashboards, and alerting.
+- Kubernetes Horizontal Pod Autoscaler (HPA).
 - Helm.
 - Kubernetes automation with Ansible and Terraform.
 - CI/CD with GitHub Actions.

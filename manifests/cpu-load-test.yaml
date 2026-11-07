@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-load-test
+  namespace: resource-lab
+  labels:
+    app: resource-lab
+    test: cpu-load
+spec:
+  restartPolicy: Never
+  containers:
+    - name: cpu-load
+      image: busybox:1.36
+      command:
+        - /bin/sh
+        - -c
+      args:
+        - |
+          echo "K8S-022 CPU load test started"
+
+          yes > /dev/null &
+          WORKER_PID=$!
+
+          sleep 180
+
+          kill "$WORKER_PID"
+          wait "$WORKER_PID" 2>/dev/null || true
+
+          echo "CPU load test completed"
+          sleep 3600
+      resources:
+        requests:
+          cpu: "50m"
+          memory: "32Mi"
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
