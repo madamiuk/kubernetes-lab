@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hpa-load-generator
+  namespace: hpa-lab
+  labels:
+    app: hpa-load-generator
+spec:
+  restartPolicy: Never
+  containers:
+    - name: load-generator
+      image: busybox:1.36
+      command:
+        - /bin/sh
+        - -c
+      args:
+        - |
+          echo "K8S-023 HTTP load test started"
+
+          while true; do
+            wget -q -O /dev/null \
+              http://hpa-demo.hpa-lab.svc.cluster.local/
+          done
+      resources:
+        requests:
+          cpu: "25m"
+          memory: "16Mi"
+        limits:
+          cpu: "100m"
+          memory: "64Mi"

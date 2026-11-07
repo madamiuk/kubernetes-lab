@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hpa-lab
+  labels:
+    app.kubernetes.io/part-of: kubernetes-lab
+    lab: k8s-023
