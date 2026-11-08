@@ -198,6 +198,7 @@ The internal HTTP test returned `HTTP/1.1 200 OK`.
 | K8S-022 | Metrics Server, Resource Metrics and CPU Throttling | Completed |
 | K8S-023 | Horizontal Pod Autoscaler (HPA) | Completed |
 | K8S-024 | Helm: Kubernetes Application Lifecycle Management | Completed |
+| K8S-025 | Prometheus and Grafana: Kubernetes Monitoring and Dashboards | Completed |
 
 ## 8. Documentation
 
@@ -217,10 +218,14 @@ Detailed technical documentation is organized into:
 - [Metrics Server, Resource Metrics and CPU Throttling](docs/12-metrics-monitoring.md)
 - [Horizontal Pod Autoscaler (HPA)](docs/13-horizontal-pod-autoscaler.md)
 - [Helm: Kubernetes Application Lifecycle Management](docs/14-helm.md)
+- [Prometheus and Grafana: Kubernetes Monitoring and Dashboards](docs/15-prometheus-grafana.md)
 
-The documentation covers completed laboratories K8S-001 through K8S-024, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, Kubernetes RBAC, resource management, Metrics Server, CPU throttling, Horizontal Pod Autoscaler (HPA), and Helm-based application lifecycle management.
+The documentation covers completed laboratories K8S-001 through K8S-025, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, Kubernetes RBAC, resource management, Metrics Server, CPU throttling, Horizontal Pod Autoscaler (HPA), Helm-based application lifecycle management, and Kubernetes monitoring with Prometheus and Grafana.
 
 The Helm laboratory includes a custom chart located in `charts/nginx-lab/`, covering chart configuration, template rendering, Kubernetes API validation, release installation, upgrades, rollbacks, test hooks, chart versioning, and rolling updates.
+The monitoring laboratory deploys Prometheus and Grafana using version-pinned Helm charts, resource requests and limits, persistent storage, Kubernetes Secrets, and declarative dashboard provisioning. It includes PromQL queries, metrics collection from Kubernetes and exporters, troubleshooting on ARM64, and recovery tests following Pod restarts.
+
+Monitoring configurations and the Kubernetes overview dashboard are maintained in `monitoring/`.
 
 ## 9. Troubleshooting Experience
 
@@ -234,12 +239,16 @@ The project includes practical investigation of:
 - Uneven distribution of HTTP connections across Nginx replicas.
 - Helm `values.yaml` indentation errors and unexpected default image tags.
 - Helm chart metadata changes triggering Kubernetes Deployment rolling updates.
+- Prometheus Config Reloader `ImagePullBackOff` caused by an image without ARM64 support, resolved by pinning a compatible image version through Helm.
+- Grafana Helm installation timeout caused by an initial container image download exceeding the configured timeout.
+- Grafana web login failures investigated using API authentication tests and application logs.
+- Grafana dashboard persistence and declarative recovery verified after a Deployment restart.
 
 ## 10. Planned Laboratories
 
 Future topics include:
 
-- Prometheus and Grafana monitoring, dashboards, and alerting.
+- Monitoring alert rules, Alertmanager integration, and notification testing.
 - Kubernetes automation with Ansible and Terraform.
 - CI/CD with GitHub Actions.
 - Deployment of the Java-based JobTracker application.

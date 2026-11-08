@@ -1,0 +1,61 @@
+# K8S-025 - Prometheus monitoring laboratory
+# Helm chart: prometheus-community/prometheus
+# Chart version: 29.45.1
+
+server:
+  replicaCount: 1
+  retention: "3d"
+
+  resources:
+    requests:
+      cpu: "150m"
+      memory: "256Mi"
+    limits:
+      cpu: "400m"
+      memory: "768Mi"
+
+  persistentVolume:
+    enabled: true
+    storageClass: standard
+    size: 2Gi
+
+configmapReload:
+  prometheus:
+    image:
+      repository: quay.io/prometheus-operator/prometheus-config-reloader
+      tag: "v0.94.2"
+      pullPolicy: IfNotPresent
+
+    resources:
+      requests:
+        cpu: "10m"
+        memory: "32Mi"
+      limits:
+        cpu: "50m"
+        memory: "64Mi"
+
+alertmanager:
+  enabled: false
+
+kube-state-metrics:
+  enabled: true
+  resources:
+    requests:
+      cpu: "30m"
+      memory: "64Mi"
+    limits:
+      cpu: "100m"
+      memory: "128Mi"
+
+prometheus-node-exporter:
+  enabled: true
+  resources:
+    requests:
+      cpu: "20m"
+      memory: "32Mi"
+    limits:
+      cpu: "100m"
+      memory: "64Mi"
+
+prometheus-pushgateway:
+  enabled: false
