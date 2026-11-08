@@ -1,24 +1,17 @@
-# K8S-025 — Prometheus and Grafana: Kubernetes Monitoring and Dashboard Provisioning
 
-**Date:** 2026-11-08
+# 15 — Prometheus and Grafana: Kubernetes Monitoring and Dashboard Provisioning
 
-**Environment:** macOS (Apple Silicon M2), Colima, Docker, kind
-
+**Laboratory:** K8S-025
+**Environment:** kind-k8s-lab
 **Kubernetes:** v1.37.0
-
 **Helm:** v4.3.1
+**Prometheus:** v3.16.0
+**Prometheus Helm chart:** 29.45.1
+**Grafana:** v13.3.0
+**Grafana Helm chart:** 14.4.0
+**Status:** Practical experiments completed
 
-**Cluster:** `k8s-lab` (`kind-k8s-lab` context)
-
-**Namespace:** `monitoring`
-
-**Releases:** `prometheus`, `grafana`
-
-**Helm charts:** `prometheus-community/prometheus` 29.45.1; `grafana-community/grafana` 14.4.0
-
-**Applications:** Prometheus v3.16.0; Grafana v13.3.0
-
-## 1. Objectives
+## 1. Objective
 
 This laboratory implemented a lightweight, reproducible monitoring stack for the local, single-node Kubernetes cluster. The objectives were to:
 

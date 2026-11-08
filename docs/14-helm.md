@@ -1,15 +1,13 @@
-# K8S-024 — Helm: Kubernetes Application Lifecycle Management
 
-**Date:** 2026-11-07
-**Environment:** macOS (Apple Silicon), Colima, Docker, kind
+# 14 — Helm: Kubernetes Application Lifecycle Management
+
+**Laboratory:** K8S-024
+**Environment:** kind-k8s-lab
 **Kubernetes:** v1.37.0
 **Helm:** v4.3.1
-**Cluster:** `k8s-lab`
-**Namespace:** `helm-lab`
-**Release:** `nginx-test`
-**Chart:** `charts/nginx-lab`
+**Status:** Practical experiments completed
 
-## 1. Objectives
+## 1. Objective
 
 The purpose of this lab was to learn how to package, deploy, configure, upgrade, test, and roll back Kubernetes applications using Helm.
 
