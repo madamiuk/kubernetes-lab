@@ -1,0 +1,15 @@
+---
+- name: Validate application configuration
+  ansible.builtin.import_playbook: validate-config.yml
+
+- name: Prepare Kubernetes namespace
+  ansible.builtin.import_playbook: namespace.yml
+
+- name: Deploy Nginx application
+  ansible.builtin.import_playbook: nginx-deployment.yml
+
+- name: Configure Nginx service
+  ansible.builtin.import_playbook: nginx-service.yml
+
+- name: Verify Nginx application readiness
+  ansible.builtin.import_playbook: verify-nginx.yml

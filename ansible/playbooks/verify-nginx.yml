@@ -1,0 +1,49 @@
+---
+- name: Verify Nginx Deployment readiness
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../vars/nginx.yml
+
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    kubeconfig_path: "{{ lookup('env', 'HOME') }}/.kube/config"
+
+  tasks:
+    - name: Wait for Nginx Deployment readiness
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        name: nginx-ansible
+        namespace: "{{ lab_namespace }}"
+        kubeconfig: "{{ kubeconfig_path }}"
+        context: "{{ kubernetes_context }}"
+      register: nginx_deployment
+      until: >-
+        nginx_deployment.resources | length == 1
+        and
+        (nginx_deployment.resources[0].status.observedGeneration | default(0) | int)
+        >=
+        (nginx_deployment.resources[0].metadata.generation | int)
+        and
+        (nginx_deployment.resources[0].status.readyReplicas | default(0) | int)
+        == (nginx_replicas | int)
+        and
+        (nginx_deployment.resources[0].status.updatedReplicas | default(0) | int)
+        == (nginx_replicas | int)
+        and
+        (nginx_deployment.resources[0].status.availableReplicas | default(0) | int)
+        == (nginx_replicas | int)
+      retries: 12
+      delay: 5
+
+    - name: Display Deployment readiness result
+      ansible.builtin.debug:
+        msg:
+          - "Deployment: {{ nginx_deployment.resources[0].metadata.name }}"
+          - "Namespace: {{ lab_namespace }}"
+          - "Desired replicas: {{ nginx_replicas }}"
+          - "Ready replicas: {{ nginx_deployment.resources[0].status.readyReplicas | default(0) }}"
+          - "Available replicas: {{ nginx_deployment.resources[0].status.availableReplicas | default(0) }}"
+          - "Deployment verification: PASSED"

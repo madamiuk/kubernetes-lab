@@ -1,0 +1,68 @@
+---
+- name: Inspect Kubernetes cluster
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    kubeconfig_path: "{{ lookup('env', 'HOME') }}/.kube/config"
+    kubernetes_context: kind-k8s-lab
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+
+  tasks:
+    - name: Retrieve Kubernetes nodes
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Node
+        kubeconfig: "{{ kubeconfig_path }}"
+        context: "{{ kubernetes_context }}"
+      register: cluster_nodes
+
+    - name: Display Kubernetes node information
+      ansible.builtin.debug:
+        msg:
+          - "Node: {{ item.metadata.name }}"
+          - "Kubernetes version: {{ item.status.nodeInfo.kubeletVersion }}"
+          - "Operating system: {{ item.status.nodeInfo.osImage }}"
+          - "Architecture: {{ item.status.nodeInfo.architecture }}"
+      loop: "{{ cluster_nodes.resources }}"
+      loop_control:
+        label: "{{ item.metadata.name }}"
+
+    - name: Retrieve Kubernetes namespaces
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+        kubeconfig: "{{ kubeconfig_path }}"
+        context: "{{ kubernetes_context }}"
+      register: cluster_namespaces
+
+    - name: Display Kubernetes namespaces
+      ansible.builtin.debug:
+        msg: >-
+          Namespace: {{ item.metadata.name }},
+          Phase: {{ item.status.phase }}
+      loop: "{{ cluster_namespaces.resources }}"
+      loop_control:
+        label: "{{ item.metadata.name }}"
+
+    - name: Retrieve Kubernetes Deployments
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        namespace: lab-apps
+        kubeconfig: "{{ kubeconfig_path }}"
+        context: "{{ kubernetes_context }}"
+      register: cluster_deployments
+
+    - name: Display Kubernetes Deployment information
+      ansible.builtin.debug:
+        msg:
+          - "Deployment: {{ item.metadata.name }}"
+          - "Namespace: {{ item.metadata.namespace }}"
+          - "Desired replicas: {{ item.spec.replicas | default(1) }}"
+          - "Ready replicas: {{ item.status.readyReplicas | default(0) }}"
+          - "Available replicas: {{ item.status.availableReplicas | default(0) }}"
+      loop: "{{ cluster_deployments.resources }}"
+      loop_control:
+        label: "{{ item.metadata.name }}"

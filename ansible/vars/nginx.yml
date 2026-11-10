@@ -1,0 +1,5 @@
+---
+lab_namespace: ansible-lab
+nginx_replicas: 3
+nginx_image: nginx:stable-alpine
+kubernetes_context: kind-k8s-lab

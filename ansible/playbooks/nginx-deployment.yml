@@ -1,0 +1,50 @@
+---
+- name: Manage Nginx Deployment in Kubernetes
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../vars/nginx.yml
+
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    kubeconfig_path: "{{ lookup('env', 'HOME') }}/.kube/config"
+
+  tasks:
+    - name: Ensure Nginx Deployment exists
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig_path }}"
+        context: "{{ kubernetes_context }}"
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: nginx-ansible
+            namespace: "{{ lab_namespace }}"
+            labels:
+              app: nginx-ansible
+              app.kubernetes.io/managed-by: ansible
+          spec:
+            replicas: "{{ nginx_replicas | int }}"
+            selector:
+              matchLabels:
+                app: nginx-ansible
+            template:
+              metadata:
+                labels:
+                  app: nginx-ansible
+              spec:
+                containers:
+                  - name: nginx
+                    image: "{{ nginx_image }}"
+                    imagePullPolicy: IfNotPresent
+                    ports:
+                      - containerPort: 80
+                    resources:
+                      requests:
+                        cpu: "10m"
+                        memory: "16Mi"
+                      limits:
+                        cpu: "100m"
+                        memory: "64Mi"

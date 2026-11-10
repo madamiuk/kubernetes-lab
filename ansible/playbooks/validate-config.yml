@@ -1,0 +1,28 @@
+---
+- name: Validate Kubernetes application configuration
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - ../vars/nginx.yml
+
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+
+  tasks:
+    - name: Validate Nginx deployment parameters
+      ansible.builtin.assert:
+        that:
+          - lab_namespace is defined
+          - lab_namespace | length > 0
+          - kubernetes_context is defined
+          - kubernetes_context | length > 0
+          - nginx_image is defined
+          - nginx_image | length > 0
+          - nginx_replicas is defined
+          - nginx_replicas | string is match('^[0-9]+$')
+          - nginx_replicas | int >= 1
+          - nginx_replicas | int <= 5
+        fail_msg: "Invalid Kubernetes deployment configuration."
+        success_msg: "Kubernetes deployment configuration validated."

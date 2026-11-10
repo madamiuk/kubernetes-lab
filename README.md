@@ -200,6 +200,7 @@ The internal HTTP test returned `HTTP/1.1 200 OK`.
 | K8S-024 | Helm: Kubernetes Application Lifecycle Management | Completed |
 | K8S-025 | Prometheus and Grafana: Kubernetes Monitoring and Dashboards | Completed |
 | K8S-026 | Prometheus Alerting, Alertmanager and Kubernetes Health Monitoring | Completed |
+| K8S-027 | Kubernetes Automation with Ansible: Declarative Application Management | Completed |
 
 ## 8. Documentation
 
@@ -221,14 +222,16 @@ Detailed technical documentation is organized into:
 - [Helm: Kubernetes Application Lifecycle Management](docs/14-helm.md)
 - [Prometheus and Grafana: Kubernetes Monitoring and Dashboards](docs/15-prometheus-grafana.md)
 - [Prometheus Alerting and Alertmanager: Kubernetes Health Monitoring](docs/16-prometheus-alertmanager.md)
+- [Kubernetes Automation with Ansible: Declarative Application Management](docs/17-ansible-kubernetes.md)
 
-
-The documentation covers completed laboratories K8S-001 through K8S-026, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, Kubernetes RBAC, resource management, Metrics Server, CPU throttling, Horizontal Pod Autoscaler (HPA), Helm-based application lifecycle management, Kubernetes monitoring with Prometheus and Grafana, and Prometheus alerting with Alertmanager.
+The documentation covers completed laboratories K8S-001 through K8S-027, including cluster administration, application deployments, networking, rolling updates, rollbacks, health probes, ConfigMaps, Secrets, persistent storage, Kubernetes RBAC, resource management, Metrics Server, CPU throttling, Horizontal Pod Autoscaler (HPA), Helm-based application lifecycle management, Kubernetes monitoring with Prometheus and Grafana, and Prometheus alerting with Alertmanager.
 
 The Helm laboratory includes a custom chart located in `charts/nginx-lab/`, covering chart configuration, template rendering, Kubernetes API validation, release installation, upgrades, rollbacks, test hooks, chart versioning, and rolling updates.
 The monitoring laboratory deploys Prometheus and Grafana using version-pinned Helm charts, resource requests and limits, persistent storage, Kubernetes Secrets, and declarative dashboard provisioning. It includes PromQL queries, metrics collection from Kubernetes and exporters, troubleshooting on ARM64, and recovery tests following Pod restarts.
 
 The alerting laboratory extends the monitoring stack with Alertmanager, Prometheus alert rules, alert routing, and Silence management. It includes controlled alert generation, verification of pending and firing states, Kubernetes Pod readiness failure simulation, and automatic alert resolution. The final configuration retains reusable Pod readiness and node MemoryPressure alert rules.
+
+The Ansible automation laboratory introduces declarative Kubernetes resource management using the kubernetes.core collection. It covers cluster inspection, Namespace, Deployment and Service provisioning, replica scaling, idempotency, check mode, automated Deployment readiness verification, shared configuration variables, and fail-fast validation of deployment parameters. The complete application deployment is managed through a single Ansible playbook.
 
 Monitoring configurations and the Kubernetes overview dashboard are maintained in `monitoring/`.
 
@@ -254,7 +257,8 @@ The project includes practical investigation of:
 Future topics include:
 
 - External Alertmanager notification channels and end-to-end notification delivery testing.
-- Kubernetes automation with Ansible and Terraform.
+- Kubernetes Helm release automation with Ansible.
+- Kubernetes infrastructure provisioning with Terraform.
 - CI/CD with GitHub Actions.
 - Deployment of the Java-based JobTracker application.
 

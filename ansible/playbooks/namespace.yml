@@ -1,0 +1,26 @@
+---
+- name: Manage Kubernetes laboratory namespace
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../vars/nginx.yml
+
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    kubeconfig_path: "{{ lookup('env', 'HOME') }}/.kube/config"
+
+  tasks:
+    - name: Ensure laboratory namespace exists
+      kubernetes.core.k8s:
+        state: present
+        api_version: v1
+        kind: Namespace
+        name: "{{ lab_namespace }}"
+        kubeconfig: "{{ kubeconfig_path }}"
+        context: "{{ kubernetes_context }}"
+        definition:
+          metadata:
+            labels:
+              app.kubernetes.io/managed-by: ansible
+              environment: lab

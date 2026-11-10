@@ -1,0 +1,36 @@
+---
+- name: Manage Nginx Kubernetes Service
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../vars/nginx.yml
+
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    kubeconfig_path: "{{ lookup('env', 'HOME') }}/.kube/config"
+
+  tasks:
+    - name: Ensure Nginx ClusterIP Service exists
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig_path }}"
+        context: "{{ kubernetes_context }}"
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: nginx-ansible
+            namespace: "{{ lab_namespace }}"
+            labels:
+              app: nginx-ansible
+              app.kubernetes.io/managed-by: ansible
+          spec:
+            type: ClusterIP
+            selector:
+              app: nginx-ansible
+            ports:
+              - name: http
+                port: 80
+                targetPort: 80
+                protocol: TCP
