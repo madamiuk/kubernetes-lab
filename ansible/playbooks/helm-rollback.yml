@@ -1,0 +1,62 @@
+---
+- name: Roll back Nginx Helm release
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    helm_release_name: nginx-ansible-helm
+    helm_namespace: ansible-lab
+    kubernetes_context: kind-k8s-lab
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    expected_current_revision: 2
+    rollback_target_revision: 1
+
+  tasks:
+    - name: Retrieve Helm release history
+      ansible.builtin.command:
+        argv:
+          - helm
+          - history
+          - "{{ helm_release_name }}"
+          - --namespace
+          - "{{ helm_namespace }}"
+          - --kube-context
+          - "{{ kubernetes_context }}"
+          - --output
+          - json
+      register: helm_history
+      changed_when: false
+      check_mode: false
+
+    - name: Validate rollback prerequisites
+      ansible.builtin.assert:
+        that:
+          - (helm_history.stdout | from_json | length) >= 2
+          - (helm_history.stdout | from_json | last).revision | int == expected_current_revision
+          - (helm_history.stdout | from_json | last).status == 'deployed'
+          - (helm_history.stdout | from_json | first).revision | int == rollback_target_revision
+        fail_msg: "Rollback prerequisites not satisfied."
+        success_msg: "Helm rollback prerequisites validated."
+
+    - name: Roll back Helm release
+      ansible.builtin.command:
+        argv:
+          - helm
+          - rollback
+          - "{{ helm_release_name }}"
+          - "{{ rollback_target_revision | string }}"
+          - --namespace
+          - "{{ helm_namespace }}"
+          - --kube-context
+          - "{{ kubernetes_context }}"
+          - --wait
+          - --timeout
+          - 2m
+      register: helm_rollback
+      when: not ansible_check_mode
+
+    - name: Display rollback result
+      ansible.builtin.debug:
+        msg: "{{ helm_rollback.stdout | default('Rollback skipped in check mode') }}"
+      when: not ansible_check_mode
